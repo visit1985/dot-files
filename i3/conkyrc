@@ -1,0 +1,32 @@
+out_to_x no
+own_window no
+out_to_console yes
+background no
+max_text_width 0
+total_run_times 0
+short_units yes
+pad_percents 3
+update_interval 5
+
+override_utf8_locale yes
+
+TEXT
+[{ "full_text":" ★ ${execi 600 pacman -Qu | wc -l} ", "color":"\#5a9dc8" },
+ { "full_text":" ➤ ${uptime_short} ", "color":"\#05f5b9" },
+ { "full_text":" ⊚ [/] ${fs_used_perc /}% ", "color":"\#5a9dc8" }, 
+ { "full_text":" ⊚ [/home] ${fs_used_perc /home}% ", "color":"\#05f5b9" }, 
+ { "full_text":" I/O ${diskio} ", "color":"\#5a9dc8" }, 
+ { "full_text":" ❤ ${cpu cpu0}% ⌇ ${execi 5 ~/.i3/conkyrc_cputemp}°C ", "color":"\#05f5b9" },
+ { "full_text":" ≣ ${memperc}% ⊜ ${swapperc}% ", "color":"\#5a9dc8" },
+ { "full_text":" IP ╒ ${addr eth0} ═ ${execi 60 ~/.i3/conkyrc_publicip} ╛ ", "color":"\#05f5b9" },
+${if_existing /sys/class/net/eth0/operstate up}
+ { "full_text":" ↗ ${upspeed eth0} ↘ ${downspeed eth0} ", "color":"\#5a9dc8" },
+${endif}
+${if_existing /sys/class/net/wlp12s0/operstate up}
+ { "full_text":" ${wireless_link_qual_perc wlp12s0}% ↗ ${upspeed wlp12s0} ↘ ${downspeed wlp12s0} ", "color":"\#5a9dc8" },
+${endif}
+${if_existing /sys/class/power_supply/BAT0/present 1}
+ { "full_text":" ↯ ${battery_percent}% ${acpiacadapter} ", "color":"\#05f5b9" },
+${endif}
+ { "full_text":" ⎋ ${time %Y/%m/%d} ${time %H:%M:%S}  ", "color":"\#ffffff" }],
+

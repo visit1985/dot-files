@@ -1,0 +1,3 @@
+#!/bin/bash
+sensors k10temp-pci-00c3 | grep temp1 | cut -c 16-19
+

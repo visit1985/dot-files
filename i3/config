@@ -1,0 +1,166 @@
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+# global modifiers
+set $super Mod4
+set $alt   Mod1
+
+# use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $super
+
+# font for window titles
+# will also be used by the bar unless a different font is specified
+font pango:Cantarell Bold 9
+
+# color scheme           border   backgr.  text     indicator
+client.focused           #4c7899  #285577  #ffffff  #2e9ef4
+client.focused_inactive  #333333  #5f676a  #ffffff  #484e50
+client.unfocused         #333333  #222222  #888888  #292d2e
+client.urgent            #2f343a  #900000  #ffffff  #900000
+
+# window border style <normal|1pixel|none|pixel>
+# used to hide the window title
+new_window pixel 2
+new_float pixel 2
+
+# make vertical tiling default for empty workspaces
+default_orientation vertical 
+
+# force floating for all new windows
+for_window [class="[.]*"] floating enable
+
+# toggle tiling / floating (snap to grid)
+bindsym $super+s floating toggle
+
+# split in horizonta orientation
+bindsym $super+x split h
+
+# split in vertical orientation
+bindsym $super+y split v
+
+# enter fullscreen mode for the focused container
+bindsym $super+f fullscreen
+
+# focus the parent / child container
+bindsym $super+a focus parent
+bindsym $super+c focus child
+
+# kill focused window
+bindsym $alt+F4 kill
+
+# change focus between tiling / floating windows
+bindsym $super+Tab focus mode_toggle
+
+# select windows with Alt+Tab (horizontally)
+bindsym $alt+Tab focus right
+bindsym $alt+Shift+Tab focus left
+
+# select windows with Ctrl+Tab (vertically)
+bindsym Ctrl+Tab focus down
+bindsym Ctrl+Shift+Tab focus up
+
+# alternatively select windows with the cursor keys
+bindsym $super+Left focus left
+bindsym $super+Down focus down
+bindsym $super+Up focus up
+bindsym $super+Right focus right
+
+# change container layout (stacked, tabbed, toggle split)
+#bindsym $super+t layout tabbed
+#bindsym $super+e layout toggle split
+
+# switch to workspace
+bindsym $super+1 workspace 1
+bindsym $super+2 workspace 2
+bindsym $super+3 workspace 3
+bindsym $super+4 workspace 4
+bindsym $super+5 workspace 5
+bindsym $super+6 workspace 6
+bindsym $super+7 workspace 7
+bindsym $super+8 workspace 8
+bindsym $super+9 workspace 9
+bindsym $super+0 workspace 10
+
+# memorize the workspace coming from and
+# switch back on current workspace modifier
+workspace_auto_back_and_forth yes
+
+# move focused container to workspace
+bindsym $super+Shift+1 move container to workspace 1
+bindsym $super+Shift+2 move container to workspace 2
+bindsym $super+Shift+3 move container to workspace 3
+bindsym $super+Shift+4 move container to workspace 4
+bindsym $super+Shift+5 move container to workspace 5
+bindsym $super+Shift+6 move container to workspace 6
+bindsym $super+Shift+7 move container to workspace 7
+bindsym $super+Shift+8 move container to workspace 8
+bindsym $super+Shift+9 move container to workspace 9
+bindsym $super+Shift+0 move container to workspace 10
+
+# restart i3 inplace (preserves your layout/session)
+bindsym $super+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $super+Shift+e exec "i3-msg exit"
+
+# resize window with arrow keys
+mode "resize" {
+        bindsym $super+Left resize shrink width 10 px or 10 ppt
+        bindsym $super+Down resize grow height 10 px or 10 ppt
+        bindsym $super+Up resize shrink height 10 px or 10 ppt
+        bindsym $super+Right resize grow width 10 px or 10 ppt
+
+        # back to normal
+        bindsym Escape mode "default"
+        bindsym $super+Escape mode "default"
+        bindsym $super+w mode "default"
+
+        # back to move
+        bindsym $super+q mode "move"
+}
+bindsym $super+w mode "resize"
+
+# move windows with the arrow keys
+mode "move" {
+        bindsym $super+Left move left
+        bindsym $super+Down move down
+        bindsym $super+Up move up
+        bindsym $super+Right move right
+
+        # back to normal
+        bindsym Escape mode "default"
+        bindsym $super+Escape mode "default"
+        bindsym $super+q mode "default"
+
+        # back to resize
+        bindsym $super+w mode "resize"
+}
+bindsym $super+q mode "move"
+
+# Start i3bar to display a workspace bar
+# plus the system information i3status (conky)
+bar {
+       status_command ~/.i3/i3status_conky
+       position top
+       colors   {
+               background #1c2027
+               statusline #ffffff
+               separator  #ffffff
+
+               # class             border   backgr.  text
+               focused_workspace   #4c7899  #285577  #ffffff
+               active_workspace    #333333  #5f676a  #ffffff
+               inactive_workspace  #333333  #222222  #888888
+               urgent_workspace    #2f343a  #900000  #ffffff
+       }
+}
+
+# start a terminal
+bindsym $super+Return exec i3-sensible-terminal
+
+# start dmenu (program launcher)
+# uses dmenu-pango from AUR
+bindsym $alt+F2 exec dmenu_run -b -p 'Run:' -nb '#1c2027' -sb '#4891c3' -fn 'Cantarell Bold 9'
+bindsym $super+r exec dmenu_run -b -p 'Run:' -nb '#1c2027' -sb '#4891c3' -fn 'Cantarell Bold 9'
+
