@@ -8,4 +8,4 @@ alias top='htop'
 alias psu='ps -fHU $USER'
 alias ports='lsof -i -P'
 alias apt-get="sudo apt-get"
-
+alias calc='bc -l <<< '

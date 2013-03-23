@@ -5,7 +5,8 @@ nitrogen --restore
 setxkbmap -layout de
 
 #xset dpms force on
-xset dpms 0 0 900
+xset +dpms
+xset dpms 900 930 960
 
 # start synergy
 synergyc -d WARNING tron
