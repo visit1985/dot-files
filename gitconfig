@@ -1,0 +1,5 @@
+[user]
+	email = somebody.here@gmx.de
+	name = Michael Göhler
+[push]
+	default = matching
