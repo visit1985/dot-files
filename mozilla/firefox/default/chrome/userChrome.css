@@ -1,0 +1,115 @@
+/*
+ * Addons:
+ * https://addons.mozilla.org/en-US/firefox/addon/prospector-lessChrome-HD/
+ * https://addons.mozilla.org/en-US/firefox/addon/all-in-one-gestures/
+ *
+ */
+
+#appcontent,
+#appcontent > #content,
+#appcontent > #content > tabbox > tabpanels {
+    background: #fbfbfb !important;
+}
+
+#main-window[stylish-url="about:blank"]:not([onclose^="PrintUtils"]):not([title^="Source Chart"]):not([chromehidden="menubar toolbar directories extrachrome "]) #content browser:not([src]){
+    opacity: 0 !important;
+}
+
+.tabbrowser-arrowscrollbox > .scrollbutton-up,
+.tabbrowser-arrowscrollbox > .scrollbutton-down,
+toolbarbutton#appmenu-toolbar-button,
+toolbarbutton#alltabs-button,
+toolbarbutton#new-tab-button,
+.tab-icon-image,
+.tabs-closebutton-box,
+.tab-close-button {
+    display: none !important;
+}
+
+#main-window:not([disablechrome]) #navigator-toolbox[tabsontop=true] {
+    border-bottom: none !important;
+}
+
+tab {
+    border-bottom: none !important;
+    border-bottom-color: #c3c3c3 !important;
+}
+
+tabs#tabbrowser-tabs, tabs#tabbrowser-tabs * {
+    max-height: 30px !important; 
+}
+
+#tabbrowser-tabs {
+    background: -moz-linear-gradient(#ededed,#eaeaea) !important; 
+    padding-top: 0px !important;
+    padding-left:6px !important;
+    padding-right:6px !important;
+    text-align: center !important;
+    border-bottom: 1px solid #bbb !important;
+    height: 30px !important;
+}
+
+.tabbrowser-tab {
+    height: 26px !important;
+    margin-left: 3px !important;
+    margin-right: 3px !important;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    color: #777 !important;
+    background: -moz-linear-gradient(#fcfcfc,#f5f5f5) !important;
+    border: 1px solid #bfbfbf !important;
+    border-radius: 3px !important;
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.03) !important;
+    width: 18px !important;
+}
+
+.tabbrowser-tab[selected=true], .tabbrowser-tab[selected=true]:hover {
+    color: #333 !important;
+    background: -moz-linear-gradient(#f5f5f5,#f0f0f0) !important;
+    box-shadow: inset 0px 2.5px 3px rgba(0,0,0,0.07) !important;
+    border: 1px solid #b4b4b4 !important;
+ }
+
+.tabbrowser-tab:hover {
+    box-shadow: inset 1px 1.5px 1.5px rgba(0,0,0,0.07) !important;
+    transition: .05s ease all;
+    color: #444 !important;
+    border-color: #c3c3c3 !important;
+}
+
+.tabbrowser-tab .tab-text {
+    margin-left: 3px !important;
+    margin-right: 3px !important;
+    margin-top: 0px !important;
+    font-size: 11px !important;
+    font-family: Cantarell !important;
+}
+
+#urlbar dropmarker,
+#identity-box,
+#star-button,
+#go-button,
+.tab-throbber,
+.tabs-newtab-button,
+.tab-throbber[progress] {
+    display: none !important;
+}
+
+.titlebar-placeholder[type="caption-buttons"] {
+    margin-left: 10px !important;
+}
+
+.tabbrowser-tabs:not([drag=detach]) > .tabbrowser-tab:not([pinned])[fadein] {
+    min-width: 30px !important;
+    max-width: 130px !important;
+}
+
+notificationbox {
+    overflow-x: hidden;
+}
+
+browser[type="content-primary"], browser[type="content-targetable"] {
+    overflow-y: scroll;
+    margin-right: -15px;
+}
+
