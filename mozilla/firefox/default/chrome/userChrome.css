@@ -113,3 +113,8 @@ browser[type="content-primary"], browser[type="content-targetable"] {
     margin-right: -15px;
 }
 
+#urlbar {
+    font-family: Cantarell !important;
+    font-size: 11px !important;
+}
+
