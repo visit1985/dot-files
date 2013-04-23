@@ -2,6 +2,8 @@
 # ~/.bashrc
 #
 
+setterm -blength 0
+
 export EDITOR=vi
 export LANG=en_US.UTF-8
 export TERM=rxvt-unicode

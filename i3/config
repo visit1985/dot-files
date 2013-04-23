@@ -146,7 +146,7 @@ bar {
        colors   {
                background #1c2027
                statusline #ffffff
-               separator  #ffffff
+               #separator  #ffffff
 
                # class             border   backgr.  text
                focused_workspace   #4c7899  #285577  #ffffff

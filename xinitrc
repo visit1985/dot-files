@@ -4,12 +4,17 @@ nitrogen --restore
 # set keyboard layout
 setxkbmap -layout de
 
-#xset dpms force on
-xset +dpms
-xset dpms 900 930 960
+# disable beep
+xset b off
+
+# xset dpms force on
+#xset +dpms
+#xset dpms 900 930 960
 
 # start synergy
-synergyc -d WARNING tron
+if [ -x /usr/bin/synergy ]; then
+    synergyc -d WARNING tron
+fi
 
 # exec window manager
 exec i3
