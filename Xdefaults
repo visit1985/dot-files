@@ -51,3 +51,7 @@ URxvt*scrollBar_right: false
 
 # scrollbar style - rxvt (default), plain, next, or xterm
 URxvt*scrollstyle: rxvt
+
+# use xsel for clipboard
+URxvt.perl-ext-common: clipboard
+

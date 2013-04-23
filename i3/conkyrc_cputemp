@@ -1,3 +1,12 @@
 #!/bin/bash
-sensors k10temp-pci-00c3 | grep temp1 | cut -c 16-19
+
+# flynn
+if temp=$(sensors k10temp-pci-00c3 2>/dev/null); then
+    sensors k10temp-pci-00c3 | grep temp1 | cut -c 16-19
+fi
+
+# zuse
+if temp=$(sensors acpitz-virtual-0 2>/dev/null); then
+    sensors acpitz-virtual-0 | grep temp1 | cut -c 16-19
+fi
 

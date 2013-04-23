@@ -17,4 +17,5 @@ fi
 
 if [ -x /usr/bin/pacman ]; then
     alias pacman='sudo pacman'
+    alias update='pacman -Syu'
 fi
