@@ -26,7 +26,7 @@ ${if_existing /sys/class/net/eth0/operstate up}
 ${endif}
 ${if_existing /sys/class/net/wlp12s0/operstate up}
  { "full_text":" IP ╒ ${addr wlp12s0} ═ ${execi 60 ~/.i3/conkyrc_publicip} ╛ ", "color":"\#05f5b9" },
- { "full_text":" ${wireless_link_qual_perc wlp12s0}% ↗ ${upspeed wlp12s0} ↘ ${downspeed wlp12s0} ", "color":"\#5a9dc8" },
+ { "full_text":" ⑂ ${wireless_link_qual_perc wlp12s0}% ↗ ${upspeed wlp12s0} ↘ ${downspeed wlp12s0} ", "color":"\#5a9dc8" },
 ${endif}
 ${if_existing /sys/class/power_supply/BAT0/present 1}
  { "full_text":" ↯ ${battery_percent}% ${acpiacadapter} ", "color":"\#05f5b9" },

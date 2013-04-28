@@ -1,0 +1,196 @@
+#!/usr/bin/perl
+#
+# needs package perl-json
+#
+
+use IO::Socket::UNIX;
+use JSON;
+use Encode;
+use Getopt::Long;
+
+use constant MAGIC_STRING => 'i3-ipc';
+
+use constant TYPE_COMMAND => 0;
+use constant TYPE_GET_WORKSPACES => 1;
+use constant TYPE_GET_TREE => 4;
+
+#
+# ipc functions
+#
+sub message {
+    my ($type, $content) = @_;
+    my $payload = '';
+
+    if ($content) {
+        $payload = encode_utf8($content);
+    }
+
+    return(MAGIC_STRING . pack('LL', length($payload), $type) . $payload);
+}
+
+sub ipc_request {
+    my ($sock, $type, $content) = @_;
+
+    # send request
+    $sock->write(message($type, $content));
+
+    # read response header
+    my $header = '';
+    $sock->read($header, length(MAGIC_STRING) + 4 + 4);
+
+    # get payload length
+    my ($len, $type) = unpack('LL', substr($header, length(MAGIC_STRING)));
+
+    # read payload
+    my $payload = '';
+    $sock->read($payload, $len);
+
+    # return decoded json
+    return decode_json $payload;
+}
+
+#
+# tree functions
+#
+sub get_node_by_name {
+    my ($ref, $name) = @_;
+
+    # search for a direct child node by name
+    foreach my $node (@{${${ref}}{'nodes'}}) {
+        if (${${node}}{'name'} eq $name) {
+            return $node;
+        }
+    }
+}
+
+sub pop_window_array {
+    my ($ref, $arr) = @_;
+    my @node_types = qw(nodes floating_nodes);
+
+    # iterate through all child nodes
+    foreach my $node_type (@node_types) {
+        foreach my $node (@{${${ref}}{$node_type}}) {
+            # if child node is not a window
+            if (${${node}}{'window'} eq undef) {
+                # go one level down
+                pop_window_array($node, \@{$arr});
+            } else {
+                # add window id to array
+                push(@{$arr}, ${${node}}{'id'});
+            }
+        }
+    }
+}
+
+sub get_focused_node {
+    my $ref = shift;
+    my $ret = '';
+    my @node_types = qw(nodes floating_nodes);
+
+    # iterate through all child nodes
+    foreach my $node_type (@node_types) {
+        foreach my $node (@{${${ref}}{$node_type}}) {
+            # if child node is not a window
+            if (${${node}}{'window'} eq undef) {
+                # go one level down
+                $ret = get_focused_node($node);
+                if ($ret != '') {
+                    return $ret;
+                }
+            } else {
+                # return focused window id
+                if (${${node}}{'focused'}) {
+                    return ${${node}}{'id'};
+                }
+            }
+        }
+    }
+    return '';
+}
+
+#
+# main
+#
+
+my $reverse;
+GetOptions("reverse" => \$reverse);
+
+# get socket path
+chomp(my $path = qx(i3 --get-socketpath));
+
+# open connection
+my $sock = IO::Socket::UNIX->new(Peer => $path);
+
+# get current workspaces
+my $response = '';
+$response = ipc_request($sock, TYPE_GET_WORKSPACES);
+
+# get focused output and workspace
+my $i3output = '';
+my $i3workspace = '';
+foreach my $node (@{$response}) {
+    if (${$node}{'focused'}) {
+        $i3output = ${$node}{output};
+        $i3workspace = ${$node}{num};
+    }
+}
+
+# get layout tree
+my $response = '';
+$response = ipc_request($sock, TYPE_GET_TREE);
+
+my @windows, $focused, $prev, $next;
+if (${$response}{'name'} eq 'root') {
+    my $output = get_node_by_name($response, $i3output);
+    my $content = get_node_by_name($output, 'content');
+    my $workspace = get_node_by_name($content, $i3workspace);
+
+    # populate window array
+    pop_window_array($workspace, \@windows);
+ 
+    # get focused window
+    $focused = get_focused_node($workspace);
+
+    # find window key for focused window
+    my $focused_key;
+    while (my ($key, $val) = each @windows) {
+        if ($val eq $focused) {
+
+            # get previous window
+            if ($key == 0) {
+                $prev = $windows[$#windows];
+            } else {
+                $prev = $windows[$key-1];
+            }
+
+            # get next window
+            if ($key == $#windows) {
+                $next = $windows[0];
+            } else {
+                $next = $windows[$key+1];
+            }
+        }
+    }
+
+}
+
+#print $prev . "\n" . $focused . "\n" . $next . "\n";
+
+my $response = '';
+if ($reverse) {
+    # set focus to previous window
+    $response = ipc_request($sock, TYPE_COMMAND, '[con_id="' . $prev . '"] focus');
+} else {
+    # set focus to next window
+    $response = ipc_request($sock, TYPE_COMMAND, '[con_id="' . $next . '"] focus');
+}
+
+close($sock);
+
+# exit with ipc command status
+if (${$response}[0]{'success'}) {
+    exit(0);
+} else {
+    exit(1);
+}
+
