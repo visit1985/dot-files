@@ -1,0 +1,57 @@
+#
+# .muttrc - config for mutt
+#
+
+# smtp
+set sendmail="/usr/bin/msmtp"
+set realname='Michael Göhler'
+set from="somebody.here@gmx.de"
+
+# imap
+set folder="imaps://imap.gmx.net/"
+set spoolfile="imaps://imap.gmx.net/INBOX/"
+set imap_user="somebody.here@gmx.de"
+#set imap_pass="xxx"
+set record="imaps://imap.gmx.net/Sent"
+set postponed="imaps://imap.gmx.net/Drafts"
+macro index,pager d "<save-message>=Trash<enter><enter>" "trash message"
+set imap_check_subscribed
+set mail_check=60
+set imap_keepalive=900
+
+# general
+set quit=ask-yes
+set move=no
+set index_format="%4C %Z  %D  %-15.15L  (%?l?%4l&%4c?)  %s"
+set date_format="%a, %d.%m.%y %H:%M"
+set sort="reverse-date"
+set menu_scroll="yes"
+set pager_context="1"
+set pager_index_lines="6"
+set pager_stop="yes"
+
+# editor
+set editor=vim
+set edit_headers=yes
+
+# quoting
+set include="yes"
+set attribution="* %n <%a> wrote:\n"
+set indent_str="> "
+
+# colors
+color index      brightwhite default  ~N
+color attachment color207    default
+color error      red         default
+color hdrdefault red         default
+color indicator  color234    color51
+color markers    cyan        default
+color message    default     default
+color normal     default     default
+color quoted     color39     default
+color search     default     green
+color signature  red         default
+color status     color69     color234
+color tilde      color165    default
+color tree       color165    default
+
