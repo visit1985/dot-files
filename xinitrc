@@ -13,7 +13,7 @@ xset b off
 
 # start synergy
 if [ -x /usr/bin/synergy ]; then
-    synergyc -d WARNING tron
+    synergyc -d ERROR tron
 fi
 
 # exec window manager
