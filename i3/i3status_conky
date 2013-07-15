@@ -10,5 +10,5 @@ echo '['
 echo '[],'
 
 # Now send blocks with information forever:
-exec conky -c ~/.i3/conkyrc
+exec conky -c ~/.i3/conkyrc 2>/dev/null
 
