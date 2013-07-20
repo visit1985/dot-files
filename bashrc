@@ -6,7 +6,9 @@ setterm -blength 0
 
 export EDITOR=vi
 export LANG=en_US.UTF-8
-export TERM=rxvt-256color
+if [ "$TERM" == "rxvt-unicode-256color" ]; then
+    export TERM=rxvt-256color
+fi
 
 # extend user's private binary path
 [ -d ~/bin ] && export PATH=$PATH:~/bin
