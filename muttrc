@@ -9,7 +9,7 @@ set from="somebody.here@gmx.de"
 
 # imap
 set folder="imaps://imap.gmx.net/"
-set spoolfile="imaps://imap.gmx.net/INBOX/"
+set spoolfile="imaps://imap.gmx.net/INBOX"
 set imap_user="somebody.here@gmx.de"
 #set imap_pass="xxx"
 set record="imaps://imap.gmx.net/Sent"
@@ -30,6 +30,20 @@ set pager_context="1"
 set pager_index_lines="6"
 set pager_stop="yes"
 
+# mutt-sidebar (AUR)
+set sidebar_width=20
+set sidebar_visible=yes
+set sidebar_delim='|'
+set sidebar_shortpath=yes
+### ctrl+n, ctrl+p to select next, prev folder
+#### ctrl+o to open selected folder
+bind index \CP sidebar-prev
+bind index \CN sidebar-next
+bind index \CO sidebar-open
+bind pager \CP sidebar-prev
+bind pager \CN sidebar-next
+bind pager \CO sidebar-open
+
 # editor
 set editor=vim
 set edit_headers=yes
@@ -40,7 +54,7 @@ set attribution="* %n <%a> wrote:\n"
 set indent_str="> "
 
 # colors
-color index      brightwhite default  ~N
+color index      brightwhite default    ~N
 color attachment color207    default
 color error      red         default
 color hdrdefault red         default

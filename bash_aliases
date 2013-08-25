@@ -3,7 +3,9 @@
 #
 
 alias ls='ls --color'
+alias l='ls -l'
 alias ll='ls -l'
+alias lll='ls -l'
 alias la='ls -la'
 alias vip='sudo su'
 alias top='htop'
