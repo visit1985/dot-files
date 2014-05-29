@@ -14,6 +14,9 @@ fi
 [ -d ~/bin ] && export PATH=$PATH:~/bin
 [ -d ~/.bin ] && export PATH=$PATH:~/.bin
 
+# expand application paths
+[ -d ~/nodejs/bin ] && export PATH=$PATH:~/nodejs/bin
+
 # read aliases
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 
