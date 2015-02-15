@@ -21,7 +21,7 @@ fi
 if [ -f /usr/share/git/git-prompt.sh ]; then
     . /usr/share/git/git-prompt.sh
     export GIT_PS1_SHOWDIRTYSTATE=1
-    export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;31m\]$(__git_ps1) \[\033[01;34m\]\$\[\033[00m\] '
+    export PS1='\[\e[01;32m\]\u@\h\[\e[01;34m\] \w\[\e[01;31m\]$(__git_ps1) \[\e[01;34m\]\$\[\e[00m\] '
 fi
 
 # extend history buffer
