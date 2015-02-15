@@ -29,5 +29,5 @@ export HISTFILESIZE=1000000000
 export HISTSIZE=1000000
 
 # fancy arch logo on shell startup
-[ ! -z "$PS1" ] && [ -x /usr/bin/archey ] && /usr/bin/archey
+[ ! -z "$PS1" ] && [ -x /usr/bin/archey3 ] && /usr/bin/archey3
 
