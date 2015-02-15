@@ -36,9 +36,10 @@ set smartcase                   " Case sensitive when uc present
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 set scrolljump=1                " Lines to scroll when cursor leaves screen
 set scrolloff=3                 " Minimum lines to keep above and below cursor
-set list                        " Show invisible characters
+"set list                        " Show invisible characters
                                 " Highlight problematic whitespace
-set listchars=tab:,_,trail:.,extends:#,nbsp:.
+"set listchars=tab:,.,trail:.,extends:#,nbsp:.
+set nolist
 
 if has('statusline')
     set laststatus=2

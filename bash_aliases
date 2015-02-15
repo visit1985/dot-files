@@ -13,6 +13,7 @@ alias psu='ps -fHU $USER'
 alias ports='lsof -i -P'
 alias calc='bc -l <<< '
 alias json='python -m json.tool'
+alias btrfs='sudo btrfs'
 
 # some more secret aliases
 if [ -r ~/.bash_aliases_secret ]; then
@@ -21,8 +22,8 @@ fi
 
 # urxvt font size control
 function ts {
-    printf '\e]710;%s\007' "xft:Ubuntu Mono:pixelsize=${1:-14}:antialias=true:hinting=true"
-    printf '\e]711;%s\007' "xft:Ubuntu Mono:bold:pixelsize=${1:-14}:antialias=true:hinting=true"
+    printf '\e]710;%s\007' "xft:Ubuntu Mono:pixelsize=${1:-16}:antialias=true:hinting=true"
+    printf '\e]711;%s\007' "xft:Ubuntu Mono:bold:pixelsize=${1:-16}:antialias=true:hinting=true"
 }
 
 # urxvt transparency control
@@ -38,3 +39,11 @@ if [ -x /usr/bin/pacman ]; then
     alias pacman='sudo pacman'
     alias update='pacman -Syu'
 fi
+
+function snap {
+    if [ ! -d /var/lib/btrfs/__snapshot/$(date +%Y%m%d) ]; then
+        sudo btrfs su sn /var/lib/btrfs/__active /var/lib/btrfs/__snapshot/$(date +%Y%m%d)
+    else
+        echo "snapshot /var/lib/btrfs/__snapshot/$(date +%Y%m%d) already exists" 1>&2
+    fi
+}

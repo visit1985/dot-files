@@ -2,7 +2,7 @@
 # ~/.bashrc
 #
 
-setterm -blength 0
+setterm -blength 0 2>/dev/null
 
 export EDITOR=vi
 export LANG=en_US.UTF-8
@@ -14,11 +14,15 @@ fi
 [ -d ~/bin ] && export PATH=$PATH:~/bin
 [ -d ~/.bin ] && export PATH=$PATH:~/.bin
 
-# expand application paths
-[ -d ~/nodejs/bin ] && export PATH=$PATH:~/nodejs/bin
-
 # read aliases
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
+
+# show git status in prompt
+if [ -f /usr/share/git/git-prompt.sh ]; then
+    . /usr/share/git/git-prompt.sh
+    export GIT_PS1_SHOWDIRTYSTATE=1
+    export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;31m\]$(__git_ps1) \[\033[01;34m\]\$\[\033[00m\] '
+fi
 
 # extend history buffer
 export HISTFILESIZE=1000000000

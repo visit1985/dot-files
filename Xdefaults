@@ -23,8 +23,8 @@ URxvt*saveLines: 12000
 
 # Xft: Ubuntu Mono font
 # package: ttf-ubuntu-font-family
-URxvt*font: xft:Ubuntu Mono:pixelsize=14:antialias=true:hinting=true
-URxvt*boldFont: xft:Ubuntu Mono:bold:pixelsize=14:antialias=true:hinting=true
+URxvt*font: xft:Ubuntu Mono:pixelsize=16:antialias=true:hinting=true
+URxvt*boldFont: xft:Ubuntu Mono:bold:pixelsize=16:antialias=true:hinting=true
 
 # Replace colors scheme
 URxvt*background:  #101010
