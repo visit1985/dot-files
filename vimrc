@@ -31,25 +31,18 @@ set scrolljump=1                " Lines to scroll when cursor leaves screen
 set scrolloff=3                 " Minimum lines to keep above and below cursor
 set nolist                      " Hide invisible characters
 
-if has('statusline')
-    set laststatus=2
-
-    " Broken down into easily includeable segments
-    set statusline=%<%f\                     " Filename
-    set statusline+=%w%h%m%r                 " Options
-    set statusline+=%{fugitive#statusline()} " Git Hotness
-    set statusline+=\ [%{&ff}/%Y]            " Filetype
-    set statusline+=\ [%{getcwd()}]          " Current dir
-    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-endif
-
 " Put all vim-internal work files out of the current directory
 set directory=~/.vim.swap
 set viewdir=~/.vim.view
 set backupdir=~/.vim.backup
 
-" Powerline plugin
-set term=xterm-256color                     " Set color terminal
+" Airline plugin
+set laststatus=2
+let g:airline_left_sep = '▒'
+let g:airline_right_sep = '▒'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = '▒'
+let g:airline#extensions#tabline#left_alt_sep = '▒'
 
 " Line number toggle function
 function! NumberToggle()
